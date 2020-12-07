@@ -1,6 +1,9 @@
 .DS_Store
 node_modules
 /dist
+drawable-xhdpi-v4
+drawable-xxhdpi-v4
+drawable-xxxhdpi-v4
 
 
 # local env files
