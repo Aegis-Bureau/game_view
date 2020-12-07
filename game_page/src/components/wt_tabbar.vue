@@ -1,9 +1,8 @@
 <template>
  <!-- 底部选项卡 -->
   <div class="tabbar">
-    <router-link>
     <mt-tabbar v-model="selected" fixed>
-      <mt-tab-item v-for="(elem,i) of tabs" :key="i" :id="i">
+      <mt-tab-item v-for="(elem,i) of tabs" :key="i" :id="i" @click.native="router(i)">
         <img slot="icon" :src="require('../assets/images/icon/tab_' + i + '_sel.png')" v-if="selected == i">
         <img slot="icon" :src="require('../assets/images/icon/tab_' + i + '_nor.png')" v-else>
         {{elem}}
@@ -21,6 +20,27 @@ export default {
     }
   },
   mounted(){
-  }
+  },
+  methods: {
+    router(to){
+     switch (to) {
+       case 'index':
+         
+         break;
+         case 'match':
+         
+         break;
+         case 'video':
+         
+         break;
+         case 'me':
+         this.$rouer.push('/djindex')
+         break;
+     
+       default:
+         break;
+     }
+    }
+  },
 }
 </script>

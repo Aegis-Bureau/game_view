@@ -1,13 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import wt_index from '../views/wt_index'
-
+//////////////dj开始/////////////////
+import Dj_index from '../views/dj/index.vue'
+//////////////dj结束/////////////////
 Vue.use(VueRouter)
 
 const routes = [
   {
     path:'/',
     component:wt_index
+  },
+  {
+    path:'/djindex',
+    component:Dj_index
   }
   // {
   //   path: '/',
