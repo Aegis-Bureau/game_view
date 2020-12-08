@@ -1,19 +1,41 @@
-//引入express框架
-const express = require('express');
-//引入body-parser中间件
-const bodyParser = require('body-parser');
-//导入pro接口模块
-const proRouter = require('./router/pro.js'); 
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
 
-//创建服务器
-const app = express();
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
 
-//监听9090端口
-app.listen(9090);
-//配置body-parser中间件
-app.use( bodyParser.urlencoded({
-  extended : false
-}) );
+var app = express();
 
-//使用pro接口模块，并添加前缀
-app.use('/pro',proRouter);
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
+});
+
+module.exports = app;
