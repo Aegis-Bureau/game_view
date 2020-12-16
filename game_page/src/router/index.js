@@ -1,10 +1,19 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import wt_index from '../views/wt_index'
-
+import ak_analyze from '../views/ak_analyze'
+import ak_game from '../views/ak_game'
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path:'/game',
+    component:ak_game
+  },
+  {
+    path:'/analyze',
+    component:ak_analyze
+  },
   {
     path:'/',
     component:wt_index
