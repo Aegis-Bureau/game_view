@@ -2,7 +2,7 @@
   <div id="ak_ale">
     <!-- 顶部 -->
     <mt-header class="title" title="数据分析">
-      <router-link to="/" slot="left">
+      <router-link to="/me" slot="left">
         <mt-button icon="back"></mt-button>
       </router-link>
     </mt-header>
@@ -48,7 +48,7 @@
             <ul>
               <li>
                 <p>可提现金额</p>
-                <span class="red">￥{{ info.zrbf }}</span>
+                <span class="red">￥{{ info.draw }}</span>
               </li>
               <li class="tx">
                 <mt-button>去提现</mt-button>
@@ -65,11 +65,11 @@
                   </span>
                 </p>
                 <div class="prompt">创作视屏的全部收益</div>
-                <span>￥{{ info.zrbf }}</span>
+                <span>￥{{ info.total}}</span>
               </li>
               <li>
                 <p>累计已提现</p>
-                <span>￥{{ info.zrfs }}</span>
+                <span>￥{{ info.deposit }}</span>
               </li>
             </ul>
           </div>
@@ -77,17 +77,17 @@
         <div class="report">
           <div>
             <p>本月视频播放收益<span>（每天24点更新昨日数据）</span></p>
-            <span class="red">￥{{ info.zrbf }}</span>
+            <span class="red">￥{{ info.Y_earnings }}</span>
           </div>
           <div>
             <ul>
               <li>
                 <p>昨日视频播放收益</p>
-                <span>￥{{ info.zrbf }}</span>
+                <span>￥{{ info.earnings }}</span>
               </li>
               <li>
                 <p>近7日视频播放收益</p>
-                <span>￥{{ info.zrfs }}</span>
+                <span>￥{{ info.earnings }}</span>
               </li>
             </ul>
           </div>
@@ -103,11 +103,11 @@
             <ul>
               <li>
                 <p>昨日涨粉</p>
-                <span>{{ info.zrbf }}</span>
+                <span>{{ info.zf }}</span>
               </li>
               <li class="tx">
                 <p>昨日降粉</p>
-                <span>{{ info.zrbf }}</span>
+                <span>{{ info.jf }}</span>
               </li>
             </ul>
           </div>
@@ -121,16 +121,23 @@ export default {
   data() {
     return {
       active: "1",
+        // 折线图数据
+        hebdomad: ["12-03", "12-04", "12-05", "12-06", "12-07", "12-08", "12-09"],
+        addPlay: [1, 32, 1, 34, 0, 30, 10], // 播放量
+        beanPlay: [20, 12, 11, 15, 0, 8, 3], // 粉丝
       info: {
-        bf: 0,
-        zrbf: 0,
-        zrfs: 0,
-        fb: 0,
+        total:"1.10",   //账户余额
+        draw:"0",       // 可提现
+        deposit:"0.00", //累计提现
+        earnings:"0",
+        Y_earnings:"1.10",
+        bf: 5,
+        zrbf: 45,
+        zrfs:3,
+        fb: 5,
+        zf:10,
+        jf:5,
       },
-      // 折线图数据
-      hebdomad: ["12-03", "12-04", "12-05", "12-06", "12-07", "12-08", "12-09"],
-      addPlay: [1, 32, 1, 34, 0, 30, 10], // 播放量
-      beanPlay: [20, 12, 11, 15, 0, 8, 3], // 粉丝
     };
   },
   mounted() {

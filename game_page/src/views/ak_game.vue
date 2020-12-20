@@ -39,30 +39,30 @@
           </p>
         </div>
       </div>
-      <div v-for="(all, i) of allGame" :key="i">
-        <div class=" time header">
-          <header class="time">
-            {{
-              moment
-                .unix(all.time)
-                .format(
-                  `Y年MM月DD日 周${Week[moment.unix(all.time).format("d")]}`
-                )
-            }}
-            <span
-              v-if="
-                moment.unix(all.time).format(`Y年MM月DD日`) ==
-                moment.unix(UniX).format(`Y年MM月DD日`)
-              "
-            >
-              今天</span
-            >
-          </header>
-        </div>
-        <div v-for="(allgames, i) of all.games" :key="i">
-          <div v-for="(v, i) of allgames.game" :key="i">
+      <div v-if="allGame.length !== 0">
+        <div v-for="(all, i) of allGame" :key="i">
+          <div class="time header">
+            <header class="time">
+              {{
+                moment
+                  .unix(all.times)
+                  .format(
+                    `Y年MM月DD日 周${Week[moment.unix(all.times).format("d")]}`
+                  )
+              }}
+              <span
+                v-if="
+                  moment.unix(all.times).format(`Y年MM月DD日`) ==
+                  moment.unix(UniX).format(`Y年MM月DD日`)
+                "
+              >
+                今天</span
+              >
+            </header>
+          </div>
+          <div v-for="(v, i) of all.games" :key="i">
             <div class="page">
-              <p class="title">{{ allgames.sort }}</p>
+              <p class="title">{{ v.sort }}</p>
               <ul>
                 <li>
                   <img v-if="v.img_1" :src="`/img/ak_game/${v.img_1}`" />
@@ -87,6 +87,10 @@
           </div>
         </div>
       </div>
+      <div v-else>
+        <img style="width:100%;" src="/img/ak_game/all/00.jpg">
+        <img style="margin-top:20px;width:100%;" src="/img/ak_game/all/01.png">
+      </div>
     </div>
   </div>
 </template>
@@ -98,110 +102,10 @@ export default {
       popupVisible: false,
       Week: ["日", "一", "二", "三", "四", "五", "六"],
       selectedId: 0,
-      // toastInstanse: null,
-      UniX: 1607817600,
-      ////////////////////////////////////////
-      items: [
-        { label: "全部" },
-        {
-          label: "EPIC联赛",
-          img: "EPIC.jpg",
-        },
-        {
-          label: "2020德玛西亚杯",
-          img: "2020dmxy.jpg",
-        },
-        {
-          label: "2020和平精英全球总决赛",
-          img: "hpjy.jpg",
-        },
-        { label: "NEST2020", img: "NEST.jpg" },
-        { label: "2020LPL夏季赛", img: "LPL.jpg" },
-        { label: "2020KPL秋季赛", img: "KPL.jpg" },
-        { label: "2020PELS3", img: "PEL.jpg" },
-        { label: "2020PCL秋季赛", img: "PCL.jpg" },
-        { label: "英雄联盟S10", img: "dmxy.jpg" },
-        { label: "2020LCS夏季赛", img: "LCS.jpg" },
-        { label: "ESLONE", img: "ESLONE.jpg" },
-        { label: "2020LEC春季赛", img: "LEC.jpg" },
-        { label: "2020PEL", img: "2020PEL.jpg" },
-        { label: "" },
-      ],
-      live: [
-        { img: "2020gwsc.jpg", title: "2020和平精英全球总决赛", begin: 1 },
-        { img: "dota2epic.jpg", title: "DOTA2 EPIC联赛", begin: 1 },
-        { img: "KPL65456.jpg", title: "2020KPL秋季赛", begin: 1 },
-        { img: "180697389.jpg", title: "英雄联盟S10全球总决赛", begin: 0 },
-        { img: "2020PCL.jpg", title: "2020PCL", begin: 0 },
-        { img: "2020lck.jpg", title: "2020LCK春季赛", begin: 0 },
-        { img: "KPL65456.jpg", title: "2020KPL春季赛", begin: 0 },
-        { img: "2020LOL.jpg", title: "2020LOL季中杯", begin: 0 },
-      ],
-      ///////////////////////////////////////
-      allGame: [
-        {
-          time: "1607817600",
-          games: [
-            {
-              sort: "和平精英全球总决赛",
-              game: [
-                {
-                  time: "1607857200",
-                  title: "第三周-周末积分赛",
-                  name_1: "",
-                  img_1: "",
-                  name_2: "",
-                  img_2: "",
-                  result: "",
-                },
-              ],
-            },
-            {
-              sort: "EPIC联赛",
-              game: [
-                {
-                  time: "1607860800",
-                  title: "D2总决赛",
-                  name_1: "LtW",
-                  img_1: "EPIC/LtW.png",
-                  name_2: "Alliance",
-                  img_2: "EPIC/Alliance.jpg",
-                  result: "",
-                },
-                {
-                  time: "1607860800",
-                  title: "D2败者组决赛",
-                  name_1: "OG",
-                  img_1: "EPIC/OG.jpg",
-                  name_2: "Vikin.gg",
-                  img_2: "EPIC/Vikin.jpg",
-                  result: "3:0",
-                },
-              ],
-            },
-          ],
-        },
-        {
-          time: "1607904000",
-          games: [
-            {
-              sort: "EPIC联赛",
-              game: [
-                {
-                  time: "1607878800",
-                  title: "决赛",
-                  name_1: "VP",
-                  img_1: "EPIC/VP.jpg",
-                  name_2: "OG",
-                  img_2: "EPIC/OG.jpg",
-                  result: "",
-                },
-              ],
-            },
-          ],
-        },
-      ],
-      ///////////////////////////////////////
+      UniX: 1607817600, //2020年12月13日
+      items: [],
+      live: [],
+      allGame: [],
       options: {
         activeColor: "red",
       },
@@ -222,20 +126,51 @@ export default {
         duration: 1500,
       });
     },
-
+    loadDate(id) {
+      // 打开加载提示框
+      this.$indicator.open({
+        text: "加载中...",
+        spinnerType: "double-bounce",
+      });
+      this.axios.get(`/ak/report?id=${id}`).then((res) => {
+        this.allGame = res.data.sss;
+        // 关闭加载提示框
+        this.$indicator.close();
+      });
+    },
   },
-   mounted(){
-     let header = document.getElementsByClassName('header');
-    window.onscroll = function(){
-      header.forEach((item)=>{
-        if(item.getBoundingClientRect().top <= 45){
-          item.firstChild.classList.add('active');
-        }else{
-          item.firstChild.classList.remove('active');
+  watch: {
+    selectedId() {
+      this.allGame = [];
+      this.loadDate(this.selectedId);
+    },
+  },
+  mounted() {
+    //  吸附
+    let header = document.getElementsByClassName("header");
+    window.onscroll = function () {
+      header.forEach((item) => {
+        if (item.getBoundingClientRect().top <= 45) {
+          item.firstChild.classList.add("active");
+        } else {
+          item.firstChild.classList.remove("active");
         }
-      })
-    }
-   }
+      });
+    };
+
+    this.axios.get("/ak/game").then((res) => {
+      this.live = res.data.result;
+
+      this.items.push({ label: "全部" });
+      let items = res.data.items;
+      items.forEach((item) => {
+        this.items.push(item);
+      });
+      this.items.push({ label: "" });
+    });
+
+    this.loadDate(this.selectedId);
+  },
 };
 </script>
 
@@ -267,7 +202,6 @@ export default {
   text-align: center;
   width: 25%;
   float: left;
-  z-index:99;
 }
 #game .more_items img {
   width: 50px;
@@ -323,11 +257,11 @@ export default {
 #game header.active {
   position: fixed;
   top: 40px;
-  /* z-index: 77; */
+  z-index: 50;
 }
 #game .page {
   text-align: center;
-  margin:20px;
+  margin: 20px;
   height: 130px;
   border-bottom: 1px solid #eee;
 }
